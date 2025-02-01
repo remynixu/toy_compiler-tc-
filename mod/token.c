@@ -10,7 +10,16 @@ int istt_keyword(char *str){
 	return 1;
 }
 
-int addtoken(struct token **tlist, unsigned long curr_tlistsize, enum token_type type){
+int addtoken(struct token **tlist, unsigned long curr_tlistsize, enum token_type type, void *data){
+	void *gptr = NULL;
+	curr_tlistsize++;
+	gptr = realloc(*tlist, curr_tlistsize);
+	if(gptr == NULL){
+		return 1;
+	}
+	gptr->type = type;
+	gptr->data = data;
+	*tlist[curr_tlistsize] = gptr;
 	return 0;
 }
 
@@ -22,7 +31,7 @@ struct token *tokenizer(char *streamstr){
 	}
 	while(streamstr != NULL){
 		if(istt_keyword(streamstr) == 1){
-			addtoken(tokens, token_amnt, TT_KEYWORD);
+			addtoken(tokens, token_amnt, TT_KEYWORD,);
 			continue;
 		}
 		streamstr++;
