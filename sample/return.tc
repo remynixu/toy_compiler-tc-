@@ -1,0 +1,15 @@
+section text;
+
+int _start{
+	return 0;
+}
+
+# RESULT:
+#
+# .section .text
+#
+# .global _start
+# _start:
+#	mov	$60,	%rax
+#	mov	$0,	%rdi
+#	syscall
